@@ -2,12 +2,12 @@
 # Cú pháp: <mẫu đường dẫn>  <@user hoặc @org/team>
 
 # Mặc định: chủ repo review mọi thay đổi.
-*                         @seeker19110
+*                         @www-donghanhcungban-org
 
 # Khu vực nhạy cảm — nên review kỹ hơn.
-/.github/                 @seeker19110
-/lib/auth.ts              @seeker19110
-/lib/db/                  @seeker19110
-/docs/framework/          @seeker19110
-/docs/adr/                @seeker19110
-/CLAUDE.md                @seeker19110
+/.github/                 @www-donghanhcungban-org
+/lib/auth.ts              @www-donghanhcungban-org
+/lib/db/                  @www-donghanhcungban-org
+/docs/framework/          @www-donghanhcungban-org
+/docs/adr/                @www-donghanhcungban-org
+/CLAUDE.md                @www-donghanhcungban-org
