@@ -18,6 +18,7 @@ và dự án tuân theo [Semantic Versioning](https://semver.org/lang/vi/).
 
 - Chuyển chủ repo sang `www-donghanhcungban-org`: cập nhật liên kết repo (FUNDING, mẫu issue, security.txt, script/test liên quan) và dòng bản quyền trong `LICENSE`/`NOTICE`; link cũ vẫn chuyển hướng.
 - Mở mã theo giấy phép MIT (`LICENSE`, `package.json`); dữ liệu Excel trong `attachments/` loại khỏi phạm vi MIT (NOTICE).
+- Nâng OCR (`alibaba/open-code-review`) 1.13.3→1.13.8: action, `ocr_version` workflow và script `ocr` trong `package.json` cùng phiên bản.
 
 ### Fixed (Sửa)
 
