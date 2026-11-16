@@ -121,7 +121,7 @@ function typeToSection(type) {
  */
 function formatCommit(commit) {
   const scopePart = commit.scope ? ` (**${commit.scope}**)` : "";
-  return `- ${commit.subject}${scopePart} ([${commit.hash}](https://github.com/seeker19110/xboss/commit/${commit.hash}))`;
+  return `- ${commit.subject}${scopePart} ([${commit.hash}](https://github.com/www-donghanhcungban-org/xboss/commit/${commit.hash}))`;
 }
 
 /**

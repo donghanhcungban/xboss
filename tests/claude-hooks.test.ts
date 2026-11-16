@@ -154,7 +154,7 @@ test("X-Templates: chặn force push, hỏi hành động đối ngoại, cho ph
     r,
     {
       tool_name: "mcp__github__merge_pull_request",
-      tool_input: { repository_full_name: "seeker19110/xboss", pr_number: 661 },
+      tool_input: { repository_full_name: "www-donghanhcungban-org/xboss", pr_number: 661 },
     },
     envDuAn(),
   );
