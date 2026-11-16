@@ -2,16 +2,34 @@ import { HAS_TEST_DB } from "./setup"; // phải đứng đầu: chặn DATABASE
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { mock } from "node:test";
-import webpush from "web-push";
+import { EventEmitter } from "node:events";
+import https from "node:https";
+import * as webpush from "web-push";
 
 // Mock đúng biên gửi HTTP: mọi endpoint ở đây là hostname public, còn chặn địa chỉ
 // nội bộ/DNS rebinding được kiểm riêng trong audit-push-ssrf.test.ts. Giữ nguyên
 // các assertion DB cho subscription chết, lỗi tạm thời và số người nhận.
+// web-push 4 là ESM (namespace bất biến, không mock.method được) và gửi qua
+// `https.request` của `node:https` — thay đúng hàm đó, nên mã hoá payload + VAPID vẫn chạy thật.
 async function moPushService(status: number) {
-  const handle = mock.method(webpush, "sendNotification", async () => {
-    if (status >= 400) throw Object.assign(new Error(`HTTP ${status}`), { statusCode: status });
-    return { statusCode: status, body: "", headers: {} };
-  });
+  const handle = mock.method(https, "request", ((
+    _options: https.RequestOptions,
+    onResponse: (res: EventEmitter & { statusCode: number; headers: object }) => void,
+  ) => {
+    const req = Object.assign(new EventEmitter(), {
+      write() {
+        return true;
+      },
+      destroy() {},
+      end() {
+        const res = Object.assign(new EventEmitter(), { statusCode: status, headers: {} });
+        onResponse(res);
+        setImmediate(() => res.emit("end"));
+        return req;
+      },
+    });
+    return req;
+  }) as unknown as typeof https.request);
   return { server: handle.mock, url: "https://push.example.test/push" };
 }
 
@@ -34,7 +52,6 @@ test("pushConfigured + gửi khi CHƯA cấu hình VAPID: no-op, trả 0", async
 });
 
 test("sendPushToUsers: danh sách người nhận rỗng là no-op ngay cả khi đã cấu hình", async () => {
-  const webpush = (await import("web-push")).default;
   const keys = webpush.generateVAPIDKeys();
   process.env.VAPID_PUBLIC_KEY = keys.publicKey;
   process.env.VAPID_PRIVATE_KEY = keys.privateKey;
@@ -47,7 +64,6 @@ test(
   "sendToSubs: 410 dọn subscription chết, 500 giữ lại, 201 tính là đã gửi",
   { skip: !HAS_TEST_DB },
   async () => {
-    const webpush = (await import("web-push")).default;
     const keys = webpush.generateVAPIDKeys();
     process.env.VAPID_PUBLIC_KEY = keys.publicKey;
     process.env.VAPID_PRIVATE_KEY = keys.privateKey;
@@ -114,7 +130,6 @@ test(
   "sendPushToAll: gửi cho mọi thiết bị đã đăng ký, không lọc theo user",
   { skip: !HAS_TEST_DB },
   async () => {
-    const webpush = (await import("web-push")).default;
     const keys = webpush.generateVAPIDKeys();
     process.env.VAPID_PUBLIC_KEY = keys.publicKey;
     process.env.VAPID_PRIVATE_KEY = keys.privateKey;
