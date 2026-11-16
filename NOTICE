@@ -1,0 +1,36 @@
+XBoss
+Copyright (c) 2026 seeker19110
+
+Mã nguồn và tài liệu của repo phát hành theo giấy phép MIT — xem LICENSE — trừ các thành phần bên
+thứ ba và các đường dẫn loại trừ liệt kê dưới đây.
+
+Thành phần bên thứ ba (giữ nguyên giấy phép gốc)
+------------------------------------------------
+
+Everything Claude Code (ECC) — file `ecc-*` trong .claude/agents/, .claude/skills/, .claude/commands/
+và .claude/rules/ecc/
+  Copyright (c) 2026 Affaan Mustafa. Giấy phép: MIT, nguyên văn tại .claude/ecc/LICENSE (ADR-0013).
+
+Phông DejaVu Sans — assets/fonts/DejaVuSans-Regular.ttf, assets/fonts/DejaVuSans-Bold.ttf
+  Bitstream Vera / DejaVu fonts license (cho phép phân phối lại), nguyên văn tại assets/fonts/LICENSE.txt.
+
+X-Templates — .xtemplates/
+  Copyright (c) 2026 seeker19110. Giấy phép: MIT (https://github.com/seeker19110/X-Templates).
+
+Phụ thuộc npm (package.json, package-lock.json) không nằm trong repo; mỗi gói giữ giấy phép riêng.
+
+Loại khỏi phạm vi MIT (chờ chủ repo quyết)
+------------------------------------------
+
+attachments/GIA THÀNH - TT AVIO Báo Cáo Tracking Tiến Độ Thi Công ACMV.xlsx
+attachments/xBoss-mockup.xlsx
+  Bảng tính gắn với một công trình thật (tên dự án, hạng mục, tiến độ thi công); quyền với dữ liệu
+  công trình có thể thuộc chủ đầu tư/nhà thầu. Các tệp này KHÔNG được cấp phép theo MIT cho tới khi
+  chủ repo xác nhận quyền phân phối lại.
+
+Nhãn hiệu
+---------
+
+Tên sản phẩm và tổ chức nhắc trong repo (ví dụ Next.js, PostgreSQL, GitHub, Sentry, Autodesk; Techcombank,
+VietQR, NAPAS 247 trên ảnh mã ủng hộ docs/assets/) là nhãn hiệu của chủ sở hữu tương ứng, chỉ dùng để
+gọi đúng tên. XBoss không liên kết với, không được tài trợ hay xác nhận bởi các chủ sở hữu đó.

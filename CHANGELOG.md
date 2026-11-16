@@ -12,11 +12,11 @@ và dự án tuân theo [Semantic Versioning](https://semver.org/lang/vi/).
 
 ### Added (Thêm)
 
--
+- Mục "Ủng hộ và liên hệ" trong README (mã VietQR, liên hệ, hỗ trợ triển khai), `.github/FUNDING.yml`, `NOTICE`.
 
 ### Changed (Đổi)
 
--
+- Mở mã theo giấy phép MIT (`LICENSE`, `package.json`); dữ liệu Excel trong `attachments/` loại khỏi phạm vi MIT (NOTICE).
 
 ### Fixed (Sửa)
 
