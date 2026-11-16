@@ -17,7 +17,7 @@ Web app quản lý tiến độ thi công MEP/ACMV cho dự án **TT AVIO Tháp 
 
 ```bash
 # 1. Clone repo
-git clone https://github.com/seeker19110/xboss.git
+git clone https://github.com/www-donghanhcungban-org/xboss.git
 cd xboss
 
 # 2. Cài dependencies

@@ -1,5 +1,5 @@
 XBoss
-Copyright (c) 2026 seeker19110
+Copyright (c) 2026 www-donghanhcungban-org
 
 Mã nguồn và tài liệu của repo phát hành theo giấy phép MIT — xem LICENSE — trừ các thành phần bên
 thứ ba và các đường dẫn loại trừ liệt kê dưới đây.
@@ -15,7 +15,7 @@ Phông DejaVu Sans — assets/fonts/DejaVuSans-Regular.ttf, assets/fonts/DejaVuS
   Bitstream Vera / DejaVu fonts license (cho phép phân phối lại), nguyên văn tại assets/fonts/LICENSE.txt.
 
 X-Templates — .xtemplates/
-  Copyright (c) 2026 seeker19110. Giấy phép: MIT (https://github.com/seeker19110/X-Templates).
+  Copyright (c) 2026 www-donghanhcungban-org. Giấy phép: MIT (https://github.com/www-donghanhcungban-org/X-Templates).
 
 Phụ thuộc npm (package.json, package-lock.json) không nằm trong repo; mỗi gói giữ giấy phép riêng.
 
