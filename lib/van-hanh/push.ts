@@ -1,6 +1,7 @@
 // Web Push qua VAPID — gửi thông báo đẩy tới điện thoại/máy tính đã đăng ký,
 // kể cả khi không mở app. Không cấu hình VAPID key → mọi hàm gửi là no-op.
-import webpush from "web-push";
+// web-push 4 là ESM thuần, chỉ có export có tên (không còn default export).
+import * as webpush from "web-push";
 import { Agent } from "node:https";
 import { query, run } from "@/lib/db";
 import { log } from "@/lib/nen/log";
