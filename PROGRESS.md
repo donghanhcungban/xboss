@@ -2,7 +2,9 @@
 
 ## Đang làm
 
-- **Nâng `next` 16.4.3→16.4.6, `eslint-config-next` →16.4.6, `@sentry/nextjs` →11.15.0** vá advisory moderate (khoảng 16.2.0–16.4.4); build cục bộ từng đỏ `SecurityFatalError` vì advisory này.
+- **Audit D-009 đợt 5a — branch `claude/zen-lovelace-n3t0t7`**: 🟢 DEP-001/002 (một phần) — thêm `engines.node >=24`, bỏ `better-sqlite3` thừa khỏi `next.config.mjs`; `npm audit --omit=dev` còn 4 moderate (chuỗi exceljs→minimatch).
+
+- **Nâng `next` 16.4.3→16.4.6 — MERGED qua #749** `ee2a9a42`, `eslint-config-next` →16.4.6, `@sentry/nextjs` →11.15.0** vá advisory moderate (khoảng 16.2.0–16.4.4); build cục bộ từng đỏ `SecurityFatalError` vì advisory này.
 
 - **OCR 1.13.9→1.13.10 — MERGED qua #748** `6f0a7c51` (thay #741 của dependabot đỏ vì test ghim phiên bản).
 
