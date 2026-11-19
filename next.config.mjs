@@ -13,7 +13,7 @@ const nextConfig = {
   // merge vào main, còn deploy chỉ chạy trên main sau merge nên code đã qua type-check rồi —
   // chạy lại trong build production chỉ tốn bộ nhớ vô ích.
   typescript: { ignoreBuildErrors: true },
-  serverExternalPackages: ["pg", "better-sqlite3"],
+  serverExternalPackages: ["pg"],
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 3600,
