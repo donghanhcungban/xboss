@@ -2,7 +2,9 @@
 
 ## Đang làm
 
-- **OCR 1.13.9→1.13.10 đồng bộ action, workflow, script** (thay #741 của dependabot đỏ vì test ghim phiên bản).
+- **Nâng `next` 16.4.3→16.4.6, `eslint-config-next` →16.4.6, `@sentry/nextjs` →11.15.0** vá advisory moderate (khoảng 16.2.0–16.4.4); build cục bộ từng đỏ `SecurityFatalError` vì advisory này.
+
+- **OCR 1.13.9→1.13.10 — MERGED qua #748** `6f0a7c51` (thay #741 của dependabot đỏ vì test ghim phiên bản).
 
 - **Audit D-009 đợt 4f — branch `claude/zen-lovelace-n3t0t7`**: 🟢 CFG-002 (một phần) — khoá TOTP không còn nhận `XBOSS_SECRET` chỉ khoảng trắng ở production; khai `PORT` trong schema env.
 
