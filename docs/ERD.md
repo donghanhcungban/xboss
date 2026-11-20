@@ -449,6 +449,7 @@
 - `idx_photos_album`: INDEX idx_photos_album ON public.task_photos USING btree (album_id)
 - `idx_photos_task`: INDEX idx_photos_task ON public.task_photos USING btree (task_id)
 - `idx_task_photos_created`: INDEX idx_task_photos_created ON public.task_photos USING btree (created_at DESC)
+- `idx_task_photos_ncr`: INDEX idx_task_photos_ncr ON public.task_photos USING btree (ncr_id) WHERE (ncr_id IS NOT NULL)
 - `idx_task_photos_task_hash`: INDEX idx_task_photos_task_hash ON public.task_photos USING btree (task_id, sha256) WHERE (sha256 IS NOT NULL)
 - `task_photos_pkey`: UNIQUE INDEX task_photos_pkey ON public.task_photos USING btree (id)
 
@@ -700,6 +701,7 @@
 **Index:**
 - `boq_items_code_key`: UNIQUE INDEX boq_items_code_key ON public.boq_items USING btree (code)
 - `boq_items_pkey`: UNIQUE INDEX boq_items_pkey ON public.boq_items USING btree (id)
+- `idx_boq_items_contract`: INDEX idx_boq_items_contract ON public.boq_items USING btree (contract_id) WHERE (contract_id IS NOT NULL)
 - `idx_boq_items_project`: INDEX idx_boq_items_project ON public.boq_items USING btree (project_id)
 - `idx_boq_items_system`: INDEX idx_boq_items_system ON public.boq_items USING btree (system_id)
 - `idx_boq_items_vo`: INDEX idx_boq_items_vo ON public.boq_items USING btree (vo_id)
@@ -820,6 +822,7 @@
 - `idx_contracts_alive`: INDEX idx_contracts_alive ON public.contracts USING btree (id) WHERE (deleted_at IS NULL)
 - `idx_contracts_fts`: INDEX idx_contracts_fts ON public.contracts USING gin (to_tsvector('simple'::regconfig, xboss_unaccent(((((COALESCE(code, ''::text) || ' '::text) || COALESCE(title, ''::text)) || ' '::text) || COALESCE(party_name, ''::text)))))
 - `idx_contracts_kind`: INDEX idx_contracts_kind ON public.contracts USING btree (kind)
+- `idx_contracts_party_supplier`: INDEX idx_contracts_party_supplier ON public.contracts USING btree (party_supplier_id) WHERE (party_supplier_id IS NOT NULL)
 - `idx_contracts_project`: INDEX idx_contracts_project ON public.contracts USING btree (project_id)
 
 ### contract_addenda
@@ -1012,9 +1015,11 @@
 **Index:**
 - `idx_payment_bills_contract`: INDEX idx_payment_bills_contract ON public.payment_bills USING btree (contract_id)
 - `idx_payment_bills_pay_status`: INDEX idx_payment_bills_pay_status ON public.payment_bills USING btree (project_id, pay_status)
+- `idx_payment_bills_payment_cert`: INDEX idx_payment_bills_payment_cert ON public.payment_bills USING btree (payment_cert_id) WHERE (payment_cert_id IS NOT NULL)
 - `idx_payment_bills_project`: INDEX idx_payment_bills_project ON public.payment_bills USING btree (project_id)
 - `idx_payment_bills_resp`: INDEX idx_payment_bills_resp ON public.payment_bills USING btree (responsible)
 - `idx_payment_bills_resp_supplier`: INDEX idx_payment_bills_resp_supplier ON public.payment_bills USING btree (responsible_supplier_id)
+- `idx_payment_bills_sheet_type`: INDEX idx_payment_bills_sheet_type ON public.payment_bills USING btree (sheet_type_id) WHERE (sheet_type_id IS NOT NULL)
 - `payment_bills_pkey`: UNIQUE INDEX payment_bills_pkey ON public.payment_bills USING btree (id)
 
 ### claims
@@ -1056,6 +1061,7 @@
 - `idx_claims_contract`: INDEX idx_claims_contract ON public.claims USING btree (contract_id)
 - `idx_claims_project`: INDEX idx_claims_project ON public.claims USING btree (project_id)
 - `idx_claims_status`: INDEX idx_claims_status ON public.claims USING btree (status)
+- `idx_claims_vo`: INDEX idx_claims_vo ON public.claims USING btree (vo_id) WHERE (vo_id IS NOT NULL)
 
 ### claim_documents
 
@@ -1106,6 +1112,8 @@
 
 **Index:**
 - `idx_invoices_alive`: INDEX idx_invoices_alive ON public.invoices USING btree (id) WHERE (deleted_at IS NULL)
+- `idx_invoices_contract`: INDEX idx_invoices_contract ON public.invoices USING btree (contract_id) WHERE (contract_id IS NOT NULL)
+- `idx_invoices_payment_bill`: INDEX idx_invoices_payment_bill ON public.invoices USING btree (payment_bill_id) WHERE (payment_bill_id IS NOT NULL)
 - `idx_invoices_project`: INDEX idx_invoices_project ON public.invoices USING btree (project_id, invoice_date)
 - `invoices_pkey`: UNIQUE INDEX invoices_pkey ON public.invoices USING btree (id)
 
@@ -1134,6 +1142,7 @@
 **Index:**
 - `advances_pkey`: UNIQUE INDEX advances_pkey ON public.advances USING btree (id)
 - `idx_advances_project`: INDEX idx_advances_project ON public.advances USING btree (project_id, status)
+- `idx_advances_proposal`: INDEX idx_advances_proposal ON public.advances USING btree (proposal_id) WHERE (proposal_id IS NOT NULL)
 
 ### cash_transactions
 
@@ -1161,7 +1170,9 @@
 
 **Index:**
 - `cash_transactions_pkey`: UNIQUE INDEX cash_transactions_pkey ON public.cash_transactions USING btree (id)
+- `idx_cash_transactions_contract`: INDEX idx_cash_transactions_contract ON public.cash_transactions USING btree (contract_id) WHERE (contract_id IS NOT NULL)
 - `idx_cash_transactions_project`: INDEX idx_cash_transactions_project ON public.cash_transactions USING btree (project_id, tx_date)
+- `idx_cash_transactions_supplier`: INDEX idx_cash_transactions_supplier ON public.cash_transactions USING btree (supplier_id) WHERE (supplier_id IS NOT NULL)
 
 ### payroll
 
@@ -1188,6 +1199,8 @@
 - `project_id` → `projects(id)`
 
 **Index:**
+- `idx_payroll_crew`: INDEX idx_payroll_crew ON public.payroll USING btree (crew_id) WHERE (crew_id IS NOT NULL)
+- `idx_payroll_personnel`: INDEX idx_payroll_personnel ON public.payroll USING btree (personnel_id) WHERE (personnel_id IS NOT NULL)
 - `idx_payroll_project`: INDEX idx_payroll_project ON public.payroll USING btree (project_id, period)
 - `payroll_pkey`: UNIQUE INDEX payroll_pkey ON public.payroll USING btree (id)
 
@@ -1215,7 +1228,9 @@
 
 **Index:**
 - `attendance_pkey`: UNIQUE INDEX attendance_pkey ON public.attendance USING btree (id)
+- `idx_attendance_crew`: INDEX idx_attendance_crew ON public.attendance USING btree (crew_id) WHERE (crew_id IS NOT NULL)
 - `idx_attendance_date`: INDEX idx_attendance_date ON public.attendance USING btree (project_id, work_date)
+- `idx_attendance_personnel`: INDEX idx_attendance_personnel ON public.attendance USING btree (personnel_id) WHERE (personnel_id IS NOT NULL)
 
 ### insurance_bonds
 
@@ -1336,6 +1351,7 @@
 - `idx_po_status`: INDEX idx_po_status ON public.purchase_orders USING btree (status)
 - `idx_purchase_orders_contract`: INDEX idx_purchase_orders_contract ON public.purchase_orders USING btree (contract_id)
 - `idx_purchase_orders_project`: INDEX idx_purchase_orders_project ON public.purchase_orders USING btree (project_id)
+- `idx_purchase_orders_supplier`: INDEX idx_purchase_orders_supplier ON public.purchase_orders USING btree (supplier_id) WHERE (supplier_id IS NOT NULL)
 - `purchase_orders_pkey`: UNIQUE INDEX purchase_orders_pkey ON public.purchase_orders USING btree (id)
 - `purchase_orders_po_code_key`: UNIQUE INDEX purchase_orders_po_code_key ON public.purchase_orders USING btree (po_code)
 
@@ -1521,6 +1537,7 @@
 - `idx_materials_project`: INDEX idx_materials_project ON public.materials USING btree (project_id)
 - `idx_materials_sheet`: INDEX idx_materials_sheet ON public.materials USING btree (sheet_type_id)
 - `idx_materials_system`: INDEX idx_materials_system ON public.materials USING btree (system_id)
+- `idx_materials_task`: INDEX idx_materials_task ON public.materials USING btree (task_id) WHERE (task_id IS NOT NULL)
 - `idx_materials_updated_at`: INDEX idx_materials_updated_at ON public.materials USING btree (updated_at DESC)
 - `materials_pkey`: UNIQUE INDEX materials_pkey ON public.materials USING btree (id)
 
@@ -1552,6 +1569,8 @@
 - `idx_mat_trans`: INDEX idx_mat_trans ON public.material_transactions USING btree (material_id)
 - `idx_mat_trans_floor`: INDEX idx_mat_trans_floor ON public.material_transactions USING btree (floor_label) WHERE (floor_label IS NOT NULL)
 - `idx_mat_trans_type`: INDEX idx_mat_trans_type ON public.material_transactions USING btree (type)
+- `idx_material_transactions_receipt_item`: INDEX idx_material_transactions_receipt_item ON public.material_transactions USING btree (receipt_item_id) WHERE (receipt_item_id IS NOT NULL)
+- `idx_material_transactions_task`: INDEX idx_material_transactions_task ON public.material_transactions USING btree (task_id) WHERE (task_id IS NOT NULL)
 - `material_transactions_idem_key`: UNIQUE INDEX material_transactions_idem_key ON public.material_transactions USING btree (material_id, type, idempotency_key) WHERE (idempotency_key IS NOT NULL)
 - `material_transactions_pkey`: UNIQUE INDEX material_transactions_pkey ON public.material_transactions USING btree (id)
 
@@ -1895,6 +1914,7 @@
 - `work_package_id` → `work_packages(id)`
 
 **Index:**
+- `idx_qc_inspections_checklist`: INDEX idx_qc_inspections_checklist ON public.qc_inspections USING btree (checklist_id) WHERE (checklist_id IS NOT NULL)
 - `idx_qc_inspections_package`: INDEX idx_qc_inspections_package ON public.qc_inspections USING btree (work_package_id)
 - `idx_qc_inspections_task`: INDEX idx_qc_inspections_task ON public.qc_inspections USING btree (task_id)
 - `qc_inspections_pkey`: UNIQUE INDEX qc_inspections_pkey ON public.qc_inspections USING btree (id)
@@ -1961,6 +1981,7 @@
 **Index:**
 - `idx_ncrs_assigned`: INDEX idx_ncrs_assigned ON public.ncrs USING btree (assigned_to)
 - `idx_ncrs_fts`: INDEX idx_ncrs_fts ON public.ncrs USING gin (to_tsvector('simple'::regconfig, xboss_unaccent(((COALESCE(code, ''::text) || ' '::text) || COALESCE(description, ''::text)))))
+- `idx_ncrs_inspection`: INDEX idx_ncrs_inspection ON public.ncrs USING btree (inspection_id) WHERE (inspection_id IS NOT NULL)
 - `idx_ncrs_project`: INDEX idx_ncrs_project ON public.ncrs USING btree (project_id)
 - `idx_ncrs_status`: INDEX idx_ncrs_status ON public.ncrs USING btree (status)
 - `idx_ncrs_task`: INDEX idx_ncrs_task ON public.ncrs USING btree (task_id)
@@ -3090,6 +3111,7 @@
 - `tender_id` → `tender_packages(id)`
 
 **Index:**
+- `idx_tender_bids_supplier`: INDEX idx_tender_bids_supplier ON public.tender_bids USING btree (supplier_id) WHERE (supplier_id IS NOT NULL)
 - `idx_tender_bids_tender`: INDEX idx_tender_bids_tender ON public.tender_bids USING btree (tender_id)
 - `tender_bids_pkey`: UNIQUE INDEX tender_bids_pkey ON public.tender_bids USING btree (id)
 - `tender_bids_tender_id_supplier_id_key`: UNIQUE INDEX tender_bids_tender_id_supplier_id_key ON public.tender_bids USING btree (tender_id, supplier_id)
