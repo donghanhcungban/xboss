@@ -24,6 +24,26 @@ test("deploy.yml chỉ chạy cho CI do push lên main của chính repo, không
   );
 });
 
+test("chỉ job deploy đủ điều kiện mới giữ chỗ trong hàng đợi VPS", () => {
+  assert.equal(/^concurrency:/m.test(workflow), false, "workflow_run của PR phải bỏ qua khóa VPS");
+  const job = workflow.match(/^  deploy:\n((?:    [^\n]*\n|\n)*)/m)?.[1] ?? "";
+  const condition = job.match(/^    if: >-\n((?:      [^\n]+\n)+)/m)?.[1] ?? "";
+  assert.deepEqual(
+    new Set(condition.trim().split(/\s*&&\s*/)),
+    new Set([
+      "github.event.workflow_run.conclusion == 'success'",
+      "github.event.workflow_run.head_branch == 'main'",
+      "github.event.workflow_run.event == 'push'",
+      "github.event.workflow_run.head_repository.full_name == github.repository",
+    ]),
+  );
+  assert.match(
+    job,
+    /^    concurrency:\n      group: deploy-main\n      cancel-in-progress: false$/m,
+  );
+  assert.match(job, /^    environment: Production$/m);
+});
+
 test("deploy.yml không tắt kiểm host key", () => {
   assert.doesNotMatch(workflow, /StrictHostKeyChecking[=\s]+(no|accept-new|off)/i);
   assert.doesNotMatch(workflow, /UserKnownHostsFile[=\s]+\/dev\/null/);

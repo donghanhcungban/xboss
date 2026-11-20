@@ -7,16 +7,6 @@ on:
     workflows: ["CI"]
     types: [completed]
 
-# 2 push liên tiếp trong lúc build trước chưa xong từng làm deploy sau đá deploy trước
-# ("Another next build process is already running", build tạm dùng chung thư mục
-# .next-build trên VPS) — không mất code (lượt sau luôn git reset --hard origin/main
-# nên tự lấy đúng bản mới nhất) nhưng để lại dấu đỏ giả trong Actions. Xếp hàng tuần tự
-# thay vì đá nhau; không cancel-in-progress vì huỷ giữa chừng lúc SSH đang chạy deploy.sh
-# trên VPS thật có thể để lại trạng thái dở dang (migration/build/pm2 restart).
-concurrency:
-  group: deploy-main
-  cancel-in-progress: false
-
 # Đọc mã của workflow và artifact của CI. Thao tác trên VPS dùng SSH key riêng.
 permissions:
   contents: read
@@ -32,6 +22,12 @@ jobs:
       github.event.workflow_run.head_branch == 'main' &&
       github.event.workflow_run.event == 'push' &&
       github.event.workflow_run.head_repository.full_name == github.repository
+    # Đặt khóa ở job: CI của PR cũng phát workflow_run. Khóa ở cấp workflow sẽ
+    # cho lượt PR thế chỗ bản main đang chờ, trước khi GitHub xét điều kiện trên.
+    # Giữ lượt đang triển khai chạy đến hết migration/build/restart trên VPS.
+    concurrency:
+      group: deploy-main
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     environment: Production
     env:
