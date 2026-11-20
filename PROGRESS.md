@@ -2,7 +2,9 @@
 
 ## Đang làm
 
-- **Audit D-009 đợt 5c — branch `claude/zen-lovelace-n3t0t7`**: 🟢 CODE-005 (một phần) — SSE `/api/events` log lần lỗi đầu của chuỗi lỗi kiểm watermark thay vì nuốt im lặng (test `route-events-loi-db`, đỏ-trước). Còn: `material-sync` snapshot hỏng (vùng §8), PATCH tasks/:id.
+- **Audit D-009 đợt 5d — branch `claude/zen-lovelace-n3t0t7`**: 🟢 DATA-002 (một phần) — migration `0177` thêm index `project_id` cho 23 bảng nghiệp vụ (chỉ `CREATE INDEX IF NOT EXISTS`, thuần thêm → đi thẳng production, không cần staging); ERD sinh lại. Còn 25 bảng cấu hình/engineering/payment_cert_adjustment chưa thêm (cần đo).
+
+- **Audit D-009 đợt 5c — MERGED qua #753** `fdcc5dca`: 🟢 CODE-005 (một phần) — SSE `/api/events` log lần lỗi đầu của chuỗi lỗi kiểm watermark thay vì nuốt im lặng (test `route-events-loi-db`, đỏ-trước). Còn: `material-sync` snapshot hỏng (vùng §8), PATCH tasks/:id.
 
 - **Audit D-009 đợt 5b — MERGED qua #751** `f8a6c49e`: 🟢 CFG-002 (một phần) — test `env-khai-bao-schema` đối chiếu mọi `process.env.X` ở `app/`, `lib/`, file gốc với schema `lib/nen/env.ts` (đỏ nếu quên khai). Còn: đối chiếu `.env.example` (owner/CI).
 
