@@ -35,3 +35,23 @@
 - **M136 — trải nghiệm và hiệu năng**: DEPLOYED qua **#675** `d413650c`; CI/deploy cùng SHA và public smoke 23–24/10 đạt. Lưu tracking/dashboard có retry/rollback, keyboard, search/nav mobile, poll tab ẩn, kiểm kê chỉ đọc và dashboard tải nguồn phụ độc lập. Local full unit 5.152 pass/0 fail/1 skip allowlist; gate 18/18, build và hồi quy đạt. Cùng fixture: dashboard API p95 329,60→232,49ms, bản tuần 259,20→129,31ms; response hash khớp. [Verification](docs/ops/evidence/m136/verification.md), [release](docs/ops/evidence/m136/release.md), goal `docs/goals/upgrade-ux-performance-2026-10.md`. Checkout gốc giữ nguyên 1.508 tệp xóa. UAT/usage theo owner vẫn chờ; không coi ngày deploy là ngày bắt đầu đo.
 
 - **Bổ sung PR #676 — vá Zod**: CI phát hiện GHSA-mrhx-c7xc-m3w5 high trên lock 4.6.5; D-002 theo `/autopilot` nâng riêng Zod lên 4.6.6, giữ schema/auth/CI. Audit production 0 vulnerability, env 11/11, engineering DB 55/55 (0 skip) và build mới đạt; gate 18/18 đạt. Đã merge theo duyệt rõ của owner tại `9afb984d`, CI main 40039658290 xanh (5.160 pass, E2E 693 pass) và deploy 40040711272 thành công lúc 06:41 ngày 24/10 UTC+7; public smoke sau deploy đạt; F4 VERIFIED; [hồ sơ](docs/ops/evidence/m136/zod-repair.md).
+
+## Audit D-009 — đợt 1–4f (chuyển từ PROGRESS.md 20/11/2026)
+
+- **Audit D-009 đợt 4f — branch `claude/zen-lovelace-n3t0t7`**: 🟢 CFG-002 (một phần) — khoá TOTP không còn nhận `XBOSS_SECRET` chỉ khoảng trắng ở production; khai `PORT` trong schema env.
+
+- **Audit D-009 đợt 4e — MERGED qua #721** `9b78718`: 🟢 XFEAT-002 — 11 trang hiển thị tiền dùng chung `fmtVndSo` (số 0 hiện "—" thống nhất, rút gọn tỷ/tr cả số âm).
+
+- **Audit D-009 đợt 4d — MERGED qua #718** `84adc90`: 🟢 SEC-013 — /api/project lộ tên tháp dự án khác (đã vá, test đỏ-trước), DELETE NCC/PO trả 401 khi chưa đăng nhập, NCC + BOQ export kiểm qua `CAN`; 🟢 CI-003 — bước npm audit dev thử lại thay vì nuốt mã thoát.
+
+- **Audit D-009 đợt 4c — MERGED qua #716** `6534d02`: 🟢 SEC-012 — /api/schedule-control che `delayNote` với thầu phụ (giữ thiết kế xem đường găng); 🟢 CODE-005 phần lưu trữ — 18 route dọn file lỗi qua `storageDeleteBestEffort` (ghi log, không nuốt im lặng). Còn 🟢 mở: xem sổ `docs/ops/AUDIT-STATUS.md`.
+
+- **Audit D-009 đợt 4b — MERGED qua #715** `a0dad71`: vá 14 🟠 kèm test đỏ-trước — NCR chặn vai trò chỉ-xem/khoá NCR đóng/kiểm tham chiếu (SEC-004/005); materials POST + import chỉ nhận sheet của dự án (SEC-006, SEC-014); user-projects PUT chỉ xoá trong phạm vi (SEC-007); presence lọc org (SEC-008); BOQ che đơn giá theo viewPayments (SEC-009); cron GET bằng phiên cần quyền ghi + chặn điều hướng khác site (SEC-010); quét bản vẽ không gắn rev chéo dự án, rev tự duyệt chỉ Admin/PM (SEC-011); upload tracking không hạ nghiem_thu + lỗi hệ thống không thành 400 (CODE-003/004); gỡ chu trình lib, cổng bắt dynamic import (ARCH-001); test materials/import + reports (TEST-001). CI-002 owner xử lý qua #720 (`environment: Production` cho job deploy).
+
+- **Audit D-009 đợt 4 — MERGED qua #713** `f036768`: 3 🔴 (payroll/:id lộ lương, YCNT bỏ kiểm dự án khi null, deploy chạy cho PR từ fork) + 3 🟢. #710 (khung 3.31.0) merged `163625b`.
+
+- **Audit D-009 đợt 2–3 — MERGED qua #712** `2978a61` — owner giao "theo phương án chất lượng" 07/11: D-011 màu trạng thái một nguồn `STATUS_CLS`/`STATUS_BAR`/`STATUS_TEXT` trong `app/components/StatusBadge.tsx` (trễ = cam, /my-tasks hết đỏ, đang thi công thống nhất blue), test `status-mau-thong-nhat` khoá cùng sắc độ; D-012 compose lại BLUEPRINT theo khung 3.30.1 (1170 MUST/741 SHOULD, 0 tick — đối soát ở đợt 4); D-010 giữ cookie OIDC theo spec M49, AUD-SEC-001 `chấp nhận` tới M138 (hạn 31/12).
+
+- **Đợt 2 (#712)**: spec e2e `finance-cash` (2 tab, `?tab=advances`, axe cả hai tab, desktop+mobile 7/7) cho trang tài chính `/finance/cash` chưa từng có spec (AUD-A11Y-001); khai `XBOSS_PG_ALLOW_EXIT_ON_IDLE` (`"0"|"1"`) trong schema `lib/nen/env.ts` (AUD-CFG-001). Cookie OIDC (AUD-SEC-001) để lại: dính TD-004 "chờ spec M49" — cần owner chốt.
+
+- **Audit full 06/11 + đợt 1 — MERGED qua #711** `dd40b5b`: sổ `docs/ops/AUDIT-STATUS.md` + báo cáo `docs/ops/AUDIT-REPORT-2026-11-06.md` (0 🔴, 1 🟠 đã sửa, 16 🟢; 8/13 nhóm `chưa quét`); PROGRESS.md < 8 KB, `xt.yaml` khai `format_check`/`coverage`. Thumbnail ảnh hiện trường cùng PR.

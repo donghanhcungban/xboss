@@ -2,7 +2,9 @@
 
 ## Đang làm
 
-- **Audit D-009 đợt 5d — branch `claude/zen-lovelace-n3t0t7`**: 🟢 DATA-002 (một phần) — migration `0177` thêm index `project_id` cho 23 bảng nghiệp vụ (chỉ `CREATE INDEX IF NOT EXISTS`, thuần thêm → đi thẳng production, không cần staging); ERD sinh lại. Còn 25 bảng cấu hình/engineering/payment_cert_adjustment chưa thêm (cần đo).
+- **Audit D-009 đợt 5e — branch `claude/zen-lovelace-n3t0t7`**: 🟢 DATA-001 (một phần) — migration `0178` thêm 22 index khoá ngoại nghiệp vụ (phần lớn index một phần `WHERE cột IS NOT NULL`; chỉ `CREATE INDEX IF NOT EXISTS`, đi thẳng production); ERD sinh lại. Dọn PROGRESS.md: chuyển các mục đợt 1–4f sang `docs/ops/progress-history.md` (còn 4,5 KB). Chưa thêm: `created_by`→users, `notifications.*_id`.
+
+- **Audit D-009 đợt 5d — MERGED qua #754** `26e5f6e8`: 🟢 DATA-002 (một phần) — migration `0177` thêm index `project_id` cho 23 bảng nghiệp vụ (chỉ `CREATE INDEX IF NOT EXISTS`, thuần thêm → đi thẳng production, không cần staging); ERD sinh lại. Còn 25 bảng cấu hình/engineering/payment_cert_adjustment chưa thêm (cần đo).
 
 - **Audit D-009 đợt 5c — MERGED qua #753** `fdcc5dca`: 🟢 CODE-005 (một phần) — SSE `/api/events` log lần lỗi đầu của chuỗi lỗi kiểm watermark thay vì nuốt im lặng (test `route-events-loi-db`, đỏ-trước). Còn: `material-sync` snapshot hỏng (vùng §8), PATCH tasks/:id.
 
@@ -13,24 +15,6 @@
 - **Nâng `next` 16.4.3→16.4.6 — MERGED qua #749** `ee2a9a42`, `eslint-config-next` →16.4.6, `@sentry/nextjs` →11.15.0** vá advisory moderate (khoảng 16.2.0–16.4.4); build cục bộ từng đỏ `SecurityFatalError` vì advisory này.
 
 - **OCR 1.13.9→1.13.10 — MERGED qua #748** `6f0a7c51` (thay #741 của dependabot đỏ vì test ghim phiên bản).
-
-- **Audit D-009 đợt 4f — branch `claude/zen-lovelace-n3t0t7`**: 🟢 CFG-002 (một phần) — khoá TOTP không còn nhận `XBOSS_SECRET` chỉ khoảng trắng ở production; khai `PORT` trong schema env.
-
-- **Audit D-009 đợt 4e — MERGED qua #721** `9b78718`: 🟢 XFEAT-002 — 11 trang hiển thị tiền dùng chung `fmtVndSo` (số 0 hiện "—" thống nhất, rút gọn tỷ/tr cả số âm).
-
-- **Audit D-009 đợt 4d — MERGED qua #718** `84adc90`: 🟢 SEC-013 — /api/project lộ tên tháp dự án khác (đã vá, test đỏ-trước), DELETE NCC/PO trả 401 khi chưa đăng nhập, NCC + BOQ export kiểm qua `CAN`; 🟢 CI-003 — bước npm audit dev thử lại thay vì nuốt mã thoát.
-
-- **Audit D-009 đợt 4c — MERGED qua #716** `6534d02`: 🟢 SEC-012 — /api/schedule-control che `delayNote` với thầu phụ (giữ thiết kế xem đường găng); 🟢 CODE-005 phần lưu trữ — 18 route dọn file lỗi qua `storageDeleteBestEffort` (ghi log, không nuốt im lặng). Còn 🟢 mở: xem sổ `docs/ops/AUDIT-STATUS.md`.
-
-- **Audit D-009 đợt 4b — MERGED qua #715** `a0dad71`: vá 14 🟠 kèm test đỏ-trước — NCR chặn vai trò chỉ-xem/khoá NCR đóng/kiểm tham chiếu (SEC-004/005); materials POST + import chỉ nhận sheet của dự án (SEC-006, SEC-014); user-projects PUT chỉ xoá trong phạm vi (SEC-007); presence lọc org (SEC-008); BOQ che đơn giá theo viewPayments (SEC-009); cron GET bằng phiên cần quyền ghi + chặn điều hướng khác site (SEC-010); quét bản vẽ không gắn rev chéo dự án, rev tự duyệt chỉ Admin/PM (SEC-011); upload tracking không hạ nghiem_thu + lỗi hệ thống không thành 400 (CODE-003/004); gỡ chu trình lib, cổng bắt dynamic import (ARCH-001); test materials/import + reports (TEST-001). CI-002 owner xử lý qua #720 (`environment: Production` cho job deploy).
-
-- **Audit D-009 đợt 4 — MERGED qua #713** `f036768`: 3 🔴 (payroll/:id lộ lương, YCNT bỏ kiểm dự án khi null, deploy chạy cho PR từ fork) + 3 🟢. #710 (khung 3.31.0) merged `163625b`.
-
-- **Audit D-009 đợt 2–3 — MERGED qua #712** `2978a61` — owner giao "theo phương án chất lượng" 07/11: D-011 màu trạng thái một nguồn `STATUS_CLS`/`STATUS_BAR`/`STATUS_TEXT` trong `app/components/StatusBadge.tsx` (trễ = cam, /my-tasks hết đỏ, đang thi công thống nhất blue), test `status-mau-thong-nhat` khoá cùng sắc độ; D-012 compose lại BLUEPRINT theo khung 3.30.1 (1170 MUST/741 SHOULD, 0 tick — đối soát ở đợt 4); D-010 giữ cookie OIDC theo spec M49, AUD-SEC-001 `chấp nhận` tới M138 (hạn 31/12).
-
-- **Đợt 2 (#712)**: spec e2e `finance-cash` (2 tab, `?tab=advances`, axe cả hai tab, desktop+mobile 7/7) cho trang tài chính `/finance/cash` chưa từng có spec (AUD-A11Y-001); khai `XBOSS_PG_ALLOW_EXIT_ON_IDLE` (`"0"|"1"`) trong schema `lib/nen/env.ts` (AUD-CFG-001). Cookie OIDC (AUD-SEC-001) để lại: dính TD-004 "chờ spec M49" — cần owner chốt.
-
-- **Audit full 06/11 + đợt 1 — MERGED qua #711** `dd40b5b`: sổ `docs/ops/AUDIT-STATUS.md` + báo cáo `docs/ops/AUDIT-REPORT-2026-11-06.md` (0 🔴, 1 🟠 đã sửa, 16 🟢; 8/13 nhóm `chưa quét`); PROGRESS.md < 8 KB, `xt.yaml` khai `format_check`/`coverage`. Thumbnail ảnh hiện trường cùng PR.
 
 ## Tiếp theo
 
