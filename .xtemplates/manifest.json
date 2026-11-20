@@ -8,7 +8,7 @@
     ".agents/skills/autopilot/SKILL.md": "sha256:edb44b68298b253a025f66dcdec1b90f74831e52873e5def8ab9eb32ee4a356d",
     ".agents/skills/blueprint/SKILL.md": "sha256:21bf3ea36baae950ae0ef42ce6c65e7ef31d4f6ac18d22c1364583be7941e912",
     ".agents/skills/complete/SKILL.md": "sha256:51b4358932305f0de58f3e292d975f511593b4627169b8df5c40caa2a508df53",
-    ".agents/skills/factory/SKILL.md": "sha256:84829b5133dcc80bf0a3b4488c76eb660f1cd0b07df02de113ba85d8ddd6cd6f",
+    ".agents/skills/factory/SKILL.md": "sha256:1fec118bf49e9047fe2d5c1c5ea6bc6a7be2a374627cce87edfb141dcf12675b",
     ".agents/skills/gate/SKILL.md": "sha256:10aef659ebf57380382e4d212739bd192c4a9957fc8be40dad07a1dcf43e8028",
     ".agents/skills/handover/SKILL.md": "sha256:0b69c0a7690fc85338f5ecf2e8bb6f36b73de95b534526f9bad9a36b470ea062",
     ".agents/skills/migrate-db/SKILL.md": "sha256:3dfbe347d263555c61d6a58d1fee2109e420452a0b0c7665bf1fb8d8c06e9ee5",
@@ -47,7 +47,7 @@
     ".claude/skills/autopilot/SKILL.md": "sha256:edb44b68298b253a025f66dcdec1b90f74831e52873e5def8ab9eb32ee4a356d",
     ".claude/skills/blueprint/SKILL.md": "sha256:21bf3ea36baae950ae0ef42ce6c65e7ef31d4f6ac18d22c1364583be7941e912",
     ".claude/skills/complete/SKILL.md": "sha256:51b4358932305f0de58f3e292d975f511593b4627169b8df5c40caa2a508df53",
-    ".claude/skills/factory/SKILL.md": "sha256:84829b5133dcc80bf0a3b4488c76eb660f1cd0b07df02de113ba85d8ddd6cd6f",
+    ".claude/skills/factory/SKILL.md": "sha256:1fec118bf49e9047fe2d5c1c5ea6bc6a7be2a374627cce87edfb141dcf12675b",
     ".claude/skills/gate/SKILL.md": "sha256:8091e01f3c6f30ccaf7c9d29c73cf5b96bca6e02226c76683e9ac9b866f7ebf9",
     ".claude/skills/handover/SKILL.md": "sha256:0b69c0a7690fc85338f5ecf2e8bb6f36b73de95b534526f9bad9a36b470ea062",
     ".claude/skills/migrate-db/SKILL.md": "sha256:3dfbe347d263555c61d6a58d1fee2109e420452a0b0c7665bf1fb8d8c06e9ee5",
@@ -69,11 +69,7 @@
     "PROGRESS.md": "sha256:d80a03db3cb157ee682314787afb2eb15911b2f4f86da2f564e49106f6f76941",
     "xt.yaml": "sha256:12ec746cf749a4cd50b26ac71b7ca0295a55d8f987ea5b1322574b07cba54af2"
   },
-  "git_hooks": [
-    ".git/hooks/commit-msg",
-    ".git/hooks/pre-commit",
-    ".git/hooks/pre-push"
-  ],
+  "git_hooks": [],
   "policy": {
     "ask_removal": "manifest-only"
   },

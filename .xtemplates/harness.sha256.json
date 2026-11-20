@@ -22,7 +22,7 @@
   ".claude/skills/autopilot/SKILL.md": "sha256:edb44b68298b253a025f66dcdec1b90f74831e52873e5def8ab9eb32ee4a356d",
   ".claude/skills/blueprint/SKILL.md": "sha256:21bf3ea36baae950ae0ef42ce6c65e7ef31d4f6ac18d22c1364583be7941e912",
   ".claude/skills/complete/SKILL.md": "sha256:51b4358932305f0de58f3e292d975f511593b4627169b8df5c40caa2a508df53",
-  ".claude/skills/factory/SKILL.md": "sha256:84829b5133dcc80bf0a3b4488c76eb660f1cd0b07df02de113ba85d8ddd6cd6f",
+  ".claude/skills/factory/SKILL.md": "sha256:1fec118bf49e9047fe2d5c1c5ea6bc6a7be2a374627cce87edfb141dcf12675b",
   ".claude/skills/gate/SKILL.md": "sha256:8091e01f3c6f30ccaf7c9d29c73cf5b96bca6e02226c76683e9ac9b866f7ebf9",
   ".claude/skills/handover/SKILL.md": "sha256:0b69c0a7690fc85338f5ecf2e8bb6f36b73de95b534526f9bad9a36b470ea062",
   ".claude/skills/migrate-db/SKILL.md": "sha256:3dfbe347d263555c61d6a58d1fee2109e420452a0b0c7665bf1fb8d8c06e9ee5",

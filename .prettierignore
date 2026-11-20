@@ -23,3 +23,19 @@ docs/ERD.md
 
 # Khung X-Templates cài vào .xtemplates/ (bản sao CHỈ ĐỌC do install.py ghi đè mỗi lần cập nhật) — giữ đúng byte, không format lại
 .xtemplates/
+
+# Bản sao Codex do installer sinh. tests/xt-skill-mirrors.test.ts đối chiếu từng byte với nguồn và manifest.
+.agents/skills/adr/SKILL.md
+.agents/skills/audit/SKILL.md
+.agents/skills/autopilot/SKILL.md
+.agents/skills/blueprint/SKILL.md
+.agents/skills/complete/SKILL.md
+.agents/skills/factory/SKILL.md
+.agents/skills/gate/SKILL.md
+.agents/skills/handover/SKILL.md
+.agents/skills/migrate-db/SKILL.md
+.agents/skills/optimize/SKILL.md
+.agents/skills/research/SKILL.md
+.agents/skills/tdd/SKILL.md
+.agents/skills/ui-verify/SKILL.md
+.agents/skills/upgrade/SKILL.md
