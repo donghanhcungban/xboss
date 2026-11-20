@@ -77,3 +77,11 @@ ERD, verify query, rollout tương thích ngược và recovery.
 - Commit và tiêu đề PR: conventional, dòng đầu ≤ 100 ký tự (`commitlint.config.cjs`; guard khung kiểm cùng ngưỡng —
   `LOOP-HARNESS-029`).
 - Tên phiên agent: `<Tên repo> — <tên nhánh>` (`LOOP-HARNESS-028`).
+
+## /factory
+
+Dùng `/factory <yêu cầu>` để mở hoặc tiếp tục một vòng sản phẩm. Đọc trạng thái bằng
+`python3 .xtemplates/scripts/xt_flow.py --json` rồi chạy các cổng của dự án.
+Trong lúc viết mã, chạy `npm run dev` để Next.js nạp lại thay đổi và
+`node --import tsx --test --watch tests/<tên>.test.ts` để lặp một test liên quan.
+Khi mở PR, dùng mẫu của XBoss và các lệnh kiểm ở mục Verification.
