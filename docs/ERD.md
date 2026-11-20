@@ -45,6 +45,7 @@
 - `project_id` → `projects(id)`
 
 **Index:**
+- `idx_towers_project`: INDEX idx_towers_project ON public.towers USING btree (project_id)
 - `towers_pkey`: UNIQUE INDEX towers_pkey ON public.towers USING btree (id)
 
 ### sheet_types
@@ -69,6 +70,7 @@
 - `tower_id` → `towers(id)`
 
 **Index:**
+- `idx_sheet_types_project`: INDEX idx_sheet_types_project ON public.sheet_types USING btree (project_id)
 - `sheet_types_pkey`: UNIQUE INDEX sheet_types_pkey ON public.sheet_types USING btree (id)
 - `sheet_types_tower_id_code_key`: UNIQUE INDEX sheet_types_tower_id_code_key ON public.sheet_types USING btree (tower_id, code)
 - `uq_sheet_types_project_slug`: UNIQUE INDEX uq_sheet_types_project_slug ON public.sheet_types USING btree (COALESCE(project_id, 0), slug)
@@ -517,6 +519,7 @@
 - `project_id` → `projects(id)`
 
 **Index:**
+- `idx_progress_albums_project`: INDEX idx_progress_albums_project ON public.progress_albums USING btree (project_id)
 - `progress_albums_pkey`: UNIQUE INDEX progress_albums_pkey ON public.progress_albums USING btree (id)
 
 ### notifications
@@ -1245,6 +1248,7 @@
 
 **Index:**
 - `idx_insurance_bonds_alive`: INDEX idx_insurance_bonds_alive ON public.insurance_bonds USING btree (id) WHERE (deleted_at IS NULL)
+- `idx_insurance_bonds_project`: INDEX idx_insurance_bonds_project ON public.insurance_bonds USING btree (project_id)
 - `insurance_bonds_pkey`: UNIQUE INDEX insurance_bonds_pkey ON public.insurance_bonds USING btree (id)
 
 ## Chi phí & mua sắm
@@ -1761,6 +1765,7 @@
 - `supplier_id` → `suppliers(id)`
 
 **Index:**
+- `idx_personnel_project`: INDEX idx_personnel_project ON public.personnel USING btree (project_id)
 - `personnel_pkey`: UNIQUE INDEX personnel_pkey ON public.personnel USING btree (id)
 
 ### crews
@@ -1823,6 +1828,7 @@
 
 **Index:**
 - `certifications_pkey`: UNIQUE INDEX certifications_pkey ON public.certifications USING btree (id)
+- `idx_certifications_project`: INDEX idx_certifications_project ON public.certifications USING btree (project_id)
 
 ### raci_matrix
 
@@ -1983,6 +1989,7 @@
 - `project_id` → `projects(id)`
 
 **Index:**
+- `idx_punch_list_project`: INDEX idx_punch_list_project ON public.punch_list USING btree (project_id)
 - `punch_list_pkey`: UNIQUE INDEX punch_list_pkey ON public.punch_list USING btree (id)
 
 ### hse_records
@@ -2094,6 +2101,7 @@
 
 **Index:**
 - `env_monitoring_pkey`: UNIQUE INDEX env_monitoring_pkey ON public.env_monitoring USING btree (id)
+- `idx_env_monitoring_project`: INDEX idx_env_monitoring_project ON public.env_monitoring USING btree (project_id)
 
 ### env_permits
 
@@ -2121,6 +2129,7 @@
 
 **Index:**
 - `env_permits_pkey`: UNIQUE INDEX env_permits_pkey ON public.env_permits USING btree (id)
+- `idx_env_permits_project`: INDEX idx_env_permits_project ON public.env_permits USING btree (project_id)
 
 ### monitoring_points
 
@@ -2186,6 +2195,7 @@
 - `recorded_by` → `users(id)`
 
 **Index:**
+- `idx_waste_logs_project`: INDEX idx_waste_logs_project ON public.waste_logs USING btree (project_id)
 - `waste_logs_pkey`: UNIQUE INDEX waste_logs_pkey ON public.waste_logs USING btree (id)
 
 ## Hiện trường & nhật ký
@@ -2540,6 +2550,7 @@
 - `system_id` → `systems(id)`
 
 **Index:**
+- `idx_warranty_items_project`: INDEX idx_warranty_items_project ON public.warranty_items USING btree (project_id)
 - `warranty_items_pkey`: UNIQUE INDEX warranty_items_pkey ON public.warranty_items USING btree (id)
 
 ### warranty_claims
@@ -2568,6 +2579,7 @@
 - `warranty_item_id` → `warranty_items(id)`
 
 **Index:**
+- `idx_warranty_claims_project`: INDEX idx_warranty_claims_project ON public.warranty_claims USING btree (project_id)
 - `warranty_claims_pkey`: UNIQUE INDEX warranty_claims_pkey ON public.warranty_claims USING btree (id)
 
 ### commissioning
@@ -2593,6 +2605,7 @@
 
 **Index:**
 - `commissioning_pkey`: UNIQUE INDEX commissioning_pkey ON public.commissioning USING btree (id)
+- `idx_commissioning_project`: INDEX idx_commissioning_project ON public.commissioning USING btree (project_id)
 
 ### handover_items
 
@@ -2617,6 +2630,7 @@
 
 **Index:**
 - `handover_items_pkey`: UNIQUE INDEX handover_items_pkey ON public.handover_items USING btree (id)
+- `idx_handover_items_project`: INDEX idx_handover_items_project ON public.handover_items USING btree (project_id)
 
 ### mobilization_items
 
@@ -2640,6 +2654,7 @@
 - `project_id` → `projects(id)`
 
 **Index:**
+- `idx_mobilization_items_project`: INDEX idx_mobilization_items_project ON public.mobilization_items USING btree (project_id)
 - `mobilization_items_pkey`: UNIQUE INDEX mobilization_items_pkey ON public.mobilization_items USING btree (id)
 
 ### demob_items
@@ -2661,6 +2676,7 @@
 
 **Index:**
 - `demob_items_pkey`: UNIQUE INDEX demob_items_pkey ON public.demob_items USING btree (id)
+- `idx_demob_items_project`: INDEX idx_demob_items_project ON public.demob_items USING btree (project_id)
 
 ### om_documents
 
@@ -2683,6 +2699,7 @@
 - `uploaded_by` → `users(id)`
 
 **Index:**
+- `idx_om_documents_project`: INDEX idx_om_documents_project ON public.om_documents USING btree (project_id)
 - `om_documents_pkey`: UNIQUE INDEX om_documents_pkey ON public.om_documents USING btree (id)
 
 ## Bản vẽ & hồ sơ
@@ -2808,6 +2825,7 @@
 - `project_id` → `projects(id)`
 
 **Index:**
+- `idx_legal_documents_project`: INDEX idx_legal_documents_project ON public.legal_documents USING btree (project_id)
 - `legal_documents_pkey`: UNIQUE INDEX legal_documents_pkey ON public.legal_documents USING btree (id)
 
 ### project_documents
@@ -2961,6 +2979,7 @@
 - `project_id` → `projects(id)`
 
 **Index:**
+- `idx_lessons_learned_project`: INDEX idx_lessons_learned_project ON public.lessons_learned USING btree (project_id)
 - `lessons_learned_pkey`: UNIQUE INDEX lessons_learned_pkey ON public.lessons_learned USING btree (id)
 
 ### community_cases
@@ -2985,6 +3004,7 @@
 
 **Index:**
 - `community_cases_pkey`: UNIQUE INDEX community_cases_pkey ON public.community_cases USING btree (id)
+- `idx_community_cases_project`: INDEX idx_community_cases_project ON public.community_cases USING btree (project_id)
 
 ### tech_links
 
@@ -3005,6 +3025,7 @@
 - `project_id` → `projects(id)`
 
 **Index:**
+- `idx_tech_links_project`: INDEX idx_tech_links_project ON public.tech_links USING btree (project_id)
 - `tech_links_pkey`: UNIQUE INDEX tech_links_pkey ON public.tech_links USING btree (id)
 
 ## Đấu thầu
@@ -3149,6 +3170,7 @@
 
 **Index:**
 - `approval_requests_pkey`: UNIQUE INDEX approval_requests_pkey ON public.approval_requests USING btree (id)
+- `idx_approval_requests_project_status`: INDEX idx_approval_requests_project_status ON public.approval_requests USING btree (project_id, status)
 - `ux_request_live`: UNIQUE INDEX ux_request_live ON public.approval_requests USING btree (entity_type, entity_id) WHERE (status = 'pending'::text)
 
 ### approval_actions
@@ -3267,6 +3289,7 @@
 - `idx_audit_at`: INDEX idx_audit_at ON public.audit_log USING btree (at DESC)
 - `idx_audit_entity`: INDEX idx_audit_entity ON public.audit_log USING btree (entity_type, entity_id)
 - `idx_audit_entity_key`: INDEX idx_audit_entity_key ON public.audit_log USING btree (entity_type, entity_key, at DESC)
+- `idx_audit_log_project_at`: INDEX idx_audit_log_project_at ON public.audit_log USING btree (project_id, at DESC)
 
 ### assignment_log
 
