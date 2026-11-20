@@ -3,6 +3,7 @@ import { getCurrentUser } from "@/lib/bao-mat/auth";
 import { getCurrentProjectId } from "@/lib/ha-tang/projects";
 import { assertModuleEnabled } from "@/lib/ha-tang/feature-flags";
 import { sheetVersionShared } from "@/lib/ha-tang/version";
+import { log } from "@/lib/nen/log";
 
 export const dynamic = "force-dynamic";
 
@@ -45,6 +46,7 @@ export async function GET(req: NextRequest) {
     async start(controller) {
       let last = "";
       let tick = 0;
+      let dangLoi = false; // đang trong chuỗi lỗi kiểm watermark liên tiếp (chỉ log lần đầu)
       openStreams++;
       counted = true;
       const close = () => {
@@ -79,8 +81,17 @@ export async function GET(req: NextRequest) {
           } else {
             send(`: ping\n\n`); // comment SSE giữ kết nối qua proxy
           }
-        } catch {
-          /* DB chập chờn — thử lại chu kỳ sau */
+          dangLoi = false;
+        } catch (err) {
+          // DB chập chờn — thử lại chu kỳ sau. Chỉ log lần lỗi đầu của chuỗi lỗi liên tiếp để
+          // không tràn log mỗi CHECK_MS, nhưng lỗi DB kéo dài vẫn để lại dấu vết (AUD-CODE-005).
+          if (!dangLoi) {
+            dangLoi = true;
+            log.warn("SSE /api/events: kiểm watermark lỗi, sẽ thử lại", {
+              sheet,
+              err: err instanceof Error ? err.message : String(err),
+            });
+          }
         }
       };
 

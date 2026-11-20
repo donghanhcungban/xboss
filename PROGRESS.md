@@ -2,7 +2,9 @@
 
 ## Đang làm
 
-- **Audit D-009 đợt 5b — branch `claude/zen-lovelace-n3t0t7`**: 🟢 CFG-002 (một phần) — test `env-khai-bao-schema` đối chiếu mọi `process.env.X` ở `app/`, `lib/`, file gốc với schema `lib/nen/env.ts` (đỏ nếu quên khai). Còn: đối chiếu `.env.example` (owner/CI).
+- **Audit D-009 đợt 5c — branch `claude/zen-lovelace-n3t0t7`**: 🟢 CODE-005 (một phần) — SSE `/api/events` log lần lỗi đầu của chuỗi lỗi kiểm watermark thay vì nuốt im lặng (test `route-events-loi-db`, đỏ-trước). Còn: `material-sync` snapshot hỏng (vùng §8), PATCH tasks/:id.
+
+- **Audit D-009 đợt 5b — MERGED qua #751** `f8a6c49e`: 🟢 CFG-002 (một phần) — test `env-khai-bao-schema` đối chiếu mọi `process.env.X` ở `app/`, `lib/`, file gốc với schema `lib/nen/env.ts` (đỏ nếu quên khai). Còn: đối chiếu `.env.example` (owner/CI).
 
 - **Audit D-009 đợt 5a — MERGED qua #750** `1e23c975`: 🟢 DEP-001/002 (một phần) — thêm `engines.node >=24`, bỏ `better-sqlite3` thừa khỏi `next.config.mjs`; `npm audit --omit=dev` còn 4 moderate (chuỗi exceljs→minimatch).
 
